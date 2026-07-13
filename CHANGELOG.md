@@ -14,6 +14,12 @@ For the full commit history, see [Releases](https://github.com/Mojang/minecraft-
   UI keys (100% coverage). Uses Taiwan-style terminology (專案/方塊/模組/建立/檔案/電腦).
   Brand names (`Minecraft`, `TypeScript`, `Blockbench`, etc.) and placeholders
   (`{version}`, `{name}`, etc.) are preserved per `{Locked}` annotations.
+- **Schema string translation layer**: Runtime `translateSchemaText()` interceptor
+  for ~12,680 strings from `@minecraft/bedrock-schemas` .form.json files (component
+  names, field titles, descriptions, summarizer text). Translation map currently
+  covers 8,447 entries with word-map + direct translations.
+- **Fixed**: Placeholder corruption (`{name}`→`{名稱}`), brand name corruption
+  (`Minecraft`→`M在ecraft`), and `{Locked}` annotation violations (94+30 keys).
 
 ### Changed
 
