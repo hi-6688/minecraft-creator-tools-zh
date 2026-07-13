@@ -8,6 +8,13 @@ For the full commit history, see [Releases](https://github.com/Mojang/minecraft-
 
 ## [Unreleased]
 
+### Added
+
+- **zh_TW locale**: Full Traditional Chinese (Taiwan) translation of all 1,745
+  UI keys (100% coverage). Uses Taiwan-style terminology (專案/方塊/模組/建立/檔案/電腦).
+  Brand names (`Minecraft`, `TypeScript`, `Blockbench`, etc.) and placeholders
+  (`{version}`, `{name}`, etc.) are preserved per `{Locked}` annotations.
+
 ### Changed
 
 - **Inspector view**: PASSED rule rows are now hidden by default. Errors,
