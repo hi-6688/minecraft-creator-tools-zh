@@ -10,6 +10,7 @@ import DataFormUtilities from "./../dataform/DataFormUtilities";
 import { FieldDataType } from "./../dataform/IField";
 import { MinecraftFilterClause } from "../minecraft/jsoncommon/MinecraftFilterClause";
 import { withLocalization, WithLocalizationProps } from "../UX/withLocalization";
+import { translateSchemaText } from "./SchemaI18n";
 
 export interface IMinecraftFilterClauseEditorProps {
   data: MinecraftFilterClause;
@@ -286,7 +287,7 @@ class MinecraftFilterClauseEditor extends Component<
     let descript = "";
 
     if (form && form.description) {
-      descript = MinecraftUtilities.shortenFilterDescription(form.description);
+      descript = translateSchemaText(MinecraftUtilities.shortenFilterDescription(form.description));
     }
 
     const narrowClose = this.props.displayNarrow ? closeButtonSpace : <></>;

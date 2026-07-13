@@ -37,6 +37,7 @@ import ISimpleReference from "../../dataform/ISimpleReference";
 import FieldUtilities from "../../dataform/FieldUtilities";
 import Utilities from "../../core/Utilities";
 import { mcColors } from "../../UX/hooks/theme/mcColors";
+import { translateSchemaText } from "../SchemaI18n";
 import CreatorToolsHost, { CreatorToolsThemeStyle } from "../../app/CreatorToolsHost";
 
 /**
@@ -90,7 +91,7 @@ export default function DropdownField(props: IDropdownFieldProps): JSX.Element {
   for (let i = 0; i < choices.length; i++) {
     const choice = choices[i];
     items.push({
-      content: choice.title || Utilities.humanify(choice.id, field.humanifyValues),
+      content: choice.title ? translateSchemaText(choice.title) : Utilities.humanify(choice.id, field.humanifyValues),
       selected: choice.id === value,
     });
 
@@ -122,7 +123,7 @@ export default function DropdownField(props: IDropdownFieldProps): JSX.Element {
       >
         {choices.map((choice, index) => (
           <MenuItem key={index} value={String(choice.id)}>
-            {choice.title || Utilities.humanify(choice.id, field.humanifyValues)}
+            {choice.title ? translateSchemaText(choice.title) : Utilities.humanify(choice.id, field.humanifyValues)}
           </MenuItem>
         ))}
       </Select>

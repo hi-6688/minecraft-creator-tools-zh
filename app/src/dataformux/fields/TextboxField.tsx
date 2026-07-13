@@ -35,6 +35,7 @@ import { TextField, Autocomplete, Box, Button } from "@mui/material";
 import { IFieldRendererProps, getCssClassName } from "./IFieldRendererProps";
 import { FieldDataType } from "../../dataform/IField";
 import FieldUtilities from "../../dataform/FieldUtilities";
+import { translateSchemaText } from "../SchemaI18n";
 import { mcColors } from "../../UX/hooks/theme/mcColors";
 import CreatorToolsHost, { CreatorToolsThemeStyle } from "../../app/CreatorToolsHost";
 
@@ -139,7 +140,7 @@ export default function TextboxField(props: ITextboxFieldProps): JSX.Element {
         const option: IDropdownOption = {
           label: choiceTitle ? choiceTitle : String(id),
           id: choices[i].id,
-          description: choices[i].description,
+          description: choices[i].description ? translateSchemaText(choices[i].description) : undefined,
         };
         options.push(option);
 
@@ -149,7 +150,7 @@ export default function TextboxField(props: ITextboxFieldProps): JSX.Element {
 
         // Show description for selected choice
         if (id === value && choices[i].description) {
-          choiceDescriptionArea = <div>{choices[i].description}</div>;
+          choiceDescriptionArea = <div>{translateSchemaText(choices[i].description)}</div>;
         }
       }
     }
@@ -186,8 +187,8 @@ export default function TextboxField(props: ITextboxFieldProps): JSX.Element {
         renderOption={(props, option) => (
           <Box component="li" {...props} key={String(option.id)}>
             <div>
-              <div>{option.label}</div>
-              {option.description && <div style={{ fontSize: "0.8em", opacity: 0.7 }}>{option.description}</div>}
+              <div>{translateSchemaText(option.label)}</div>
+              {option.description && <div style={{ fontSize: "0.8em", opacity: 0.7 }}>{translateSchemaText(option.description)}</div>}
             </div>
           </Box>
         )}

@@ -46,6 +46,7 @@ import ISummarizer from "../dataform/ISummarizer";
 import IProjectTheme from "../UX/types/IProjectTheme";
 import IFormDefinition from "../dataform/IFormDefinition";
 import CreatorToolsHost, { CreatorToolsThemeStyle } from "../app/CreatorToolsHost";
+import { translateSchemaText } from "./SchemaI18n";
 
 export interface ISummarizerProps {
   /**
@@ -268,7 +269,7 @@ export default class Summarizer extends Component<ISummarizerProps, ISummarizerS
           {icon}
         </span>
       );
-      const textElement = <span key={`${key}-text`}>{token.text}</span>;
+      const textElement = <span key={`${key}-text`}>{translateSchemaText(token.text)}</span>;
 
       return (
         <span className={classes} key={key}>
@@ -289,7 +290,7 @@ export default class Summarizer extends Component<ISummarizerProps, ISummarizerS
 
     return (
       <span className={classes} key={key}>
-        {token.text}
+        {translateSchemaText(token.text)}
       </span>
     );
   }

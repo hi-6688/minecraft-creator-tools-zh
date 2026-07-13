@@ -173,6 +173,7 @@ import { ICssClassConfig } from "./fields/IFieldRendererProps";
 import Summarizer from "./Summarizer";
 import ISummarizer from "../dataform/ISummarizer";
 import IProjectTheme from "../UX/types/IProjectTheme";
+import { translateSchemaText } from "./SchemaI18n";
 
 export interface IDataFormProps extends IDataContainer {
   definition: IFormDefinition;
@@ -1335,7 +1336,9 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
           let sampleElements = [];
 
           // Use field description, or fall back to well-known field defaults
-          const fieldDescription = field.description || DataForm._getDefaultFieldDescription(field.id);
+          const fieldDescription =
+            (field.description ? translateSchemaText(field.description) : undefined) ||
+            DataForm._getDefaultFieldDescription(field.id);
 
           if (fieldDescription) {
             let descrip = fieldDescription.replace(/\\\\/gi, "\\");
@@ -1669,7 +1672,10 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
     const subheader = [];
 
     if (this.props.displayTitle) {
-      let title = this.props.definition?.title;
+      let title =
+        this.props.definition?.title != null
+          ? translateSchemaText(this.props.definition.title)
+          : undefined;
 
       if (!title) {
         if (this.props.definition.id) {
@@ -1738,7 +1744,7 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
     if (this.props.displayDescription) {
       subheader.push(
         <div key="description" className={this.getCssClassName("description")}>
-          {this.props.definition.description}
+          {translateSchemaText(this.props.definition.description || "")}
         </div>
       );
     }
@@ -2065,7 +2071,7 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
                 type="number"
                 value={curVal !== undefined ? curVal : ""}
                 placeholder={group.hideFieldTitles ? title : undefined}
-                title={field.description}
+                title={field.description ? translateSchemaText(field.description) : undefined}
                 onChange={(e) => {
                   const strVal = e.target.value;
                   // Pass empty string as undefined, otherwise pass the string value
@@ -2075,7 +2081,7 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
               />
             </div>
             {!group.hideFieldTitles && (
-              <label className="df-groupedFieldLabel" title={field.description}>
+              <label className="df-groupedFieldLabel" title={field.description ? translateSchemaText(field.description) : undefined}>
                 {title}
               </label>
             )}
@@ -2090,14 +2096,14 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
                 type="text"
                 value={curVal !== undefined ? String(curVal) : ""}
                 placeholder={group.hideFieldTitles ? title : undefined}
-                title={field.description}
+                title={field.description ? translateSchemaText(field.description) : undefined}
                 onChange={(e) => {
                   this.processInputUpdate(field.id, e.target.value);
                 }}
               />
             </div>
             {!group.hideFieldTitles && (
-              <label className="df-groupedFieldLabel" title={field.description}>
+              <label className="df-groupedFieldLabel" title={field.description ? translateSchemaText(field.description) : undefined}>
                 {title}
               </label>
             )}
@@ -2109,7 +2115,7 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
           <div className="df-groupedField" key={fieldKey}>
             <div className="df-groupedFieldValue">{curVal !== undefined ? String(curVal) : "-"}</div>
             {!group.hideFieldTitles && (
-              <label className="df-groupedFieldLabel" title={field.description}>
+              <label className="df-groupedFieldLabel" title={field.description ? translateSchemaText(field.description) : undefined}>
                 {title}
               </label>
             )}
@@ -2127,8 +2133,8 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
           borderBottomColor: getThemeColors().background1,
         }}
       >
-        {group.title && <div className="df-fieldGroupTitle">{group.title}</div>}
-        {group.description && <div className="df-fieldGroupDescription">{group.description}</div>}
+        {group.title && <div className="df-fieldGroupTitle">{translateSchemaText(group.title)}</div>}
+        {group.description && <div className="df-fieldGroupDescription">{translateSchemaText(group.description)}</div>}
         <div className={layoutClass}>{fieldElements}</div>
       </div>
     );
@@ -2448,7 +2454,7 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
           const subField = field.subFields[key];
 
           if (subField.title) {
-            title = subField.title;
+            title = translateSchemaText(subField.title);
           }
         }
 
@@ -3428,13 +3434,13 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
               const subField = field.subFields[val];
 
               if (subField && subField.title) {
-                title = subField.title;
+                title = translateSchemaText(subField.title);
               }
             }
           } else if (field.noun) {
             title = field.noun + " " + title;
           } else if (fieldSubForm && fieldSubForm.title) {
-            title = fieldSubForm.title + " " + title;
+            title = translateSchemaText(fieldSubForm.title) + " " + title;
           }
 
           const subForm = (
@@ -3608,13 +3614,13 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
             const subField = field.subFields[val];
 
             if (subField && subField.title) {
-              title = subField.title;
+              title = translateSchemaText(subField.title);
             }
           }
         } else if (field.noun) {
           title = field.noun + " " + title;
         } else if (fieldSubForm && fieldSubForm.title) {
-          title = fieldSubForm.title + " " + title;
+          title = translateSchemaText(fieldSubForm.title) + " " + title;
         }
 
         if (this.props.carto && this.props.project) {
@@ -3709,7 +3715,7 @@ export default class DataForm extends Component<IDataFormProps, IDataFormState> 
           const subField = field.subFields[key];
 
           if (subField.title) {
-            title = subField.title;
+            title = translateSchemaText(subField.title);
           }
         }
 

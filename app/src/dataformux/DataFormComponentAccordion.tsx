@@ -41,6 +41,7 @@ import { faChevronRight, faChevronDown, faMinus } from "@fortawesome/free-solid-
 import { getThemeColors } from "../UX/hooks/theme/useThemeColors";
 import IProjectTheme from "../UX/types/IProjectTheme";
 import IFormDefinition from "../dataform/IFormDefinition";
+import { translateSchemaText } from "./SchemaI18n";
 
 interface IComponentEntry {
   /** Canonical component id, e.g. "minecraft:climate" */
@@ -216,12 +217,12 @@ export default class DataFormComponentAccordion extends Component<
               <div
                 className="dfca-header"
                 onClick={() => this._toggleSection(entry.canonName)}
-                title={entry.description}
+                title={translateSchemaText(entry.description)}
               >
                 <span className="dfca-chevron">
                   <FontAwesomeIcon icon={isExpanded ? faChevronDown : faChevronRight} />
                 </span>
-                <span className="dfca-title">{entry.displayName}</span>
+                <span className="dfca-title">{translateSchemaText(entry.displayName)}</span>
                 {isPresent && <span className="dfca-badge dfca-badge-present">active</span>}
                 {!isPresent && <span className="dfca-badge dfca-badge-absent">click to add</span>}
                 {isPresent && !this.props.readOnly && (
@@ -237,7 +238,7 @@ export default class DataFormComponentAccordion extends Component<
               </div>
               {isExpanded && component && (
                 <div className="dfca-body">
-                  {entry.description && <div className="dfca-description">{entry.description}</div>}
+                  {entry.description && <div className="dfca-description">{translateSchemaText(entry.description)}</div>}
                   <DataForm
                     key={"dfca-" + entry.canonName}
                     definition={entry.form}
