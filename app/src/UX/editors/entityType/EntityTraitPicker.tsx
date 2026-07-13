@@ -42,6 +42,7 @@ import {
 } from "../../types/TraitData";
 import IProjectTheme from "../../types/IProjectTheme";
 import { clickableKeyHandler } from "../../shared/accessibilityUtils";
+import { translateSchemaText } from "../../../dataformux/SchemaI18n";
 
 // ============================================================================
 // PROPS & STATE
@@ -171,7 +172,7 @@ export default class EntityTraitPicker extends Component<IEntityTraitPickerProps
             {section.group && (
               <SectionHeading level={3} className="cwiz-trait-group-header">
                 <span className="cwiz-trait-group-icon">{EXCLUSIVE_GROUP_ICONS[section.group] || ""}</span>
-                {EXCLUSIVE_GROUP_LABELS[section.group] || section.group}
+                {translateSchemaText(EXCLUSIVE_GROUP_LABELS[section.group] || section.group)}
                 <span className="cwiz-trait-group-line" />
               </SectionHeading>
             )}
@@ -192,15 +193,15 @@ export default class EntityTraitPicker extends Component<IEntityTraitPickerProps
                     className={`cwiz-trait ${isSelected ? "cwiz-trait-selected" : ""}`}
                     onClick={() => this._handleTraitClick(trait)}
                     aria-pressed={isSelected}
-                    title={confidenceLabel ? `${trait.description} (${confidenceLabel})` : trait.description}
+                    title={translateSchemaText(trait.description) + (confidenceLabel ? ` (${confidenceLabel})` : '')}
                     {...clickableKeyHandler(() => this._handleTraitClick(trait))}
                   >
                     <div className="cwiz-trait-icon" style={{ color: getTraitIconColor(trait) }}>
                       {renderEntityTraitIcon(trait.id)}
                     </div>
                     <div className="cwiz-trait-text">
-                      <div className="cwiz-trait-label">{trait.label}</div>
-                      <div className="cwiz-trait-desc">{trait.description}</div>
+                      <div className="cwiz-trait-label">{translateSchemaText(trait.label)}</div>
+                      <div className="cwiz-trait-desc">{translateSchemaText(trait.description)}</div>
                     </div>
                     {isSelected && <div className="cwiz-trait-check">&#10003;</div>}
                   </div>

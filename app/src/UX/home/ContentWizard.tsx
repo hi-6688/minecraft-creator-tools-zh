@@ -44,6 +44,7 @@ import { clickableKeyHandler } from "../shared/accessibilityUtils";
 import IProjectTheme from "../types/IProjectTheme";
 import CreatorToolsHost, { CreatorToolsThemeStyle } from "../../app/CreatorToolsHost";
 import { WithLocalizationProps, withLocalization } from "../withLocalization";
+import { translateSchemaText } from "../../dataformux/SchemaI18n";
 
 // ============================================================================
 // WIZARD TYPE ENUM
@@ -1028,8 +1029,8 @@ class ContentWizard extends Component<IContentWizardProps, IContentWizardState> 
                   {renderBlockTraitIcon(trait.id)}
                 </div>
                 <div className="cwiz-trait-text">
-                  <div className="cwiz-trait-label">{trait.label}</div>
-                  <div className="cwiz-trait-desc">{trait.description}</div>
+                  <div className="cwiz-trait-label">{translateSchemaText(trait.label)}</div>
+                  <div className="cwiz-trait-desc">{translateSchemaText(trait.description)}</div>
                 </div>
                 {isSelected && <div className="cwiz-trait-check">&#10003;</div>}
               </div>
@@ -1206,8 +1207,8 @@ class ContentWizard extends Component<IContentWizardProps, IContentWizardState> 
                   {renderItemTraitIcon(trait.id)}
                 </div>
                 <div className="cwiz-trait-text">
-                  <div className="cwiz-trait-label">{trait.label}</div>
-                  <div className="cwiz-trait-desc">{trait.description}</div>
+                  <div className="cwiz-trait-label">{translateSchemaText(trait.label)}</div>
+                  <div className="cwiz-trait-desc">{translateSchemaText(trait.description)}</div>
                 </div>
                 {isSelected && <div className="cwiz-trait-check">&#10003;</div>}
               </div>
