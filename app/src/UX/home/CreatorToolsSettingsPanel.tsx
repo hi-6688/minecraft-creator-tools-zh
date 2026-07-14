@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles, faEye, faCode, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import IProjectTheme from "../types/IProjectTheme";
 import { withLocalization, WithLocalizationProps } from "../withLocalization";
+import { translateSchemaText } from "../../dataformux/SchemaI18n";
 
 export const CreatorToolsEditorPreferenceLabels = ["Focused", "Full", "Raw"];
 
@@ -274,7 +275,7 @@ class CreatorToolsSettingsPanel extends Component<
     // Row 1-2: Edit Experience (label in col 1, options in col 2)
     coreProps.push(
       <div className="csp-label csp-defaultEditlabel" key="csp-defaultEditlabel" id="csp-defaultEditlabel">
-        Edit Experience
+        {translateSchemaText("Edit Experience")}
       </div>
     );
 
@@ -293,8 +294,8 @@ class CreatorToolsSettingsPanel extends Component<
               <FontAwesomeIcon icon={faWandMagicSparkles} />
             </div>
             <div className="csp-editOptionContent">
-              <div className="csp-editOptionTitle">Focused</div>
-              <div className="csp-editOptionDesc">Visual editors, simplified view</div>
+              <div className="csp-editOptionTitle">{translateSchemaText("Focused")}</div>
+              <div className="csp-editOptionDesc">{translateSchemaText("Visual editors, simplified view")}</div>
             </div>
             {editPreference === CreatorToolsEditPreference.summarized && (
               <div className="csp-editOptionCheck">
@@ -315,8 +316,8 @@ class CreatorToolsSettingsPanel extends Component<
               <FontAwesomeIcon icon={faEye} />
             </div>
             <div className="csp-editOptionContent">
-              <div className="csp-editOptionTitle">Full</div>
-              <div className="csp-editOptionDesc">Visual editors, all files visible</div>
+              <div className="csp-editOptionTitle">{translateSchemaText("Full")}</div>
+              <div className="csp-editOptionDesc">{translateSchemaText("Visual editors, all files visible")}</div>
             </div>
             {editPreference === CreatorToolsEditPreference.editors && (
               <div className="csp-editOptionCheck">
@@ -337,8 +338,8 @@ class CreatorToolsSettingsPanel extends Component<
               <FontAwesomeIcon icon={faCode} />
             </div>
             <div className="csp-editOptionContent">
-              <div className="csp-editOptionTitle">Raw</div>
-              <div className="csp-editOptionDesc">Raw JSON editing by default</div>
+              <div className="csp-editOptionTitle">{translateSchemaText("Raw")}</div>
+              <div className="csp-editOptionDesc">{translateSchemaText("Raw JSON editing by default")}</div>
             </div>
             {editPreference === CreatorToolsEditPreference.raw && (
               <div className="csp-editOptionCheck">
@@ -350,9 +351,9 @@ class CreatorToolsSettingsPanel extends Component<
         <div className="csp-propertyNote">
           {editPreference === CreatorToolsEditPreference.summarized ||
           editPreference === CreatorToolsEditPreference.editors
-            ? "Visual editors normalize whitespace when they save. Comments and exact field ordering inside JSON files may be lost on save. For files where formatting matters, use Raw mode. "
+            ? translateSchemaText("Visual editors normalize whitespace when they save. Comments and exact field ordering inside JSON files may be lost on save. For files where formatting matters, use Raw mode. ")
             : ""}
-          You can edit items as Raw JSON using the '...' menu on items in the list.
+          {translateSchemaText("You can edit items as Raw JSON using the '...' menu on items in the list.")}
         </div>
       </div>
     );
@@ -360,7 +361,7 @@ class CreatorToolsSettingsPanel extends Component<
     // Row 3: Appearance - label left, dropdown right
     coreProps.push(
       <div className="csp-label csp-themelabel" key="csp-themelabel" id="csp-themelabel">
-        Appearance
+        {translateSchemaText("Appearance")}
       </div>
     );
     coreProps.push(
@@ -372,9 +373,9 @@ class CreatorToolsSettingsPanel extends Component<
           size="small"
           sx={{ minWidth: 240 }}
         >
-          <MenuItem value={ThemePreference.deviceDefault}>Device default</MenuItem>
-          <MenuItem value={ThemePreference.dark}>Dark mode</MenuItem>
-          <MenuItem value={ThemePreference.light}>Light mode</MenuItem>
+          <MenuItem value={ThemePreference.deviceDefault}>{translateSchemaText("Device default")}</MenuItem>
+          <MenuItem value={ThemePreference.dark}>{translateSchemaText("Dark mode")}</MenuItem>
+          <MenuItem value={ThemePreference.light}>{translateSchemaText("Light mode")}</MenuItem>
         </Select>
       </div>
     );
@@ -382,11 +383,9 @@ class CreatorToolsSettingsPanel extends Component<
     // Row 4: Format before save - label left, toggle right
     coreProps.push(
       <div className="csp-label csp-formatbeforesavelabel" key="csp-formatbeforesavelabel">
-        Format JSON and script on save
+        {translateSchemaText("Format JSON and script on save")}
         <div className="csp-propertyNote" style={{ fontSize: 12, opacity: 0.7, marginTop: 4 }}>
-          Off by default for pro safety. Turn on if you want the editor to auto-format hand-written JSON each save.
-          Note: enabling may rewrite whitespace, normalize array layouts, and remove comments inside JSON files you have
-          not opened.
+          {translateSchemaText("Off by default for pro safety. Turn on if you want the editor to auto-format hand-written JSON each save. Note: enabling may rewrite whitespace, normalize array layouts, and remove comments inside JSON files you have not opened.")}
         </div>
       </div>
     );
@@ -421,7 +420,7 @@ class CreatorToolsSettingsPanel extends Component<
         key="csp-defaultDeployTargetlabel"
         id="csp-defaultDeployTargetlabel"
       >
-        Deployment Target
+        {translateSchemaText("Deployment Target")}
       </div>
     );
     coreProps.push(
@@ -446,7 +445,7 @@ class CreatorToolsSettingsPanel extends Component<
     // Row 5: Target Minecraft - label left, dropdown right
     coreProps.push(
       <div className="csp-label csp-tracklabel" key="csp-tracklabel" id="csp-tracklabel">
-        Target Minecraft
+        {translateSchemaText("Target Minecraft")}
       </div>
     );
     coreProps.push(
